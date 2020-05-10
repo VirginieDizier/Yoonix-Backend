@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost/user", {
+mongoose.connect("mongodb://localhost/yoonix", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -16,6 +16,6 @@ const userRoutes = require("./routes/user");
 
 app.use(userRoutes);
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log("Server has started");
 });

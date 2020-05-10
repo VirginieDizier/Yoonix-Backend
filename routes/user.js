@@ -20,14 +20,13 @@ router.get("/user", async (req, res) => {
 
 // CREATE
 
-router.post("/create", async (req, res) => {
+router.post("/user/create", async (req, res) => {
   try {
-    let username = req.body.username;
-    let email = req.body.email;
-
     const newUser = new User({
-      username: username,
-      email: email,
+      lastname: req.body.lastname,
+      firstname: req.body.firstname,
+      email: req.body.email,
+      password: req.body.password,
     });
     await newUser.save();
     res.json(newUser);
