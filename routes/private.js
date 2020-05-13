@@ -9,10 +9,9 @@ const authUser = async (req, res, next) => {
   try {
     const auth = req.headers.authorization;
     if (!auth) {
-      res.status(401).json({
+      return res.status(401).json({
         error: "Missing Authorization Header",
       });
-      return;
     }
 
     const parts = req.headers.authorization.split(" ");
@@ -25,22 +24,18 @@ const authUser = async (req, res, next) => {
     console.log({ token });
     console.log("secret key", process.env.JWT_KEY);
 
-    const payload = jwt.verify(
-      token,
-      process.env.JWT_KEY
-      //      {
-      //     ignoreExpiration: true,
-      // }
-    );
+    const payload = jwt.verify(token, process.env.JWT_KEY);
     console.log(payload);
-    const { email } = payload;
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(401).json({
-        error: "Invalid Token",
+
+    if (payload.email) {
+      next();
+    } else {
+      res.status(401).json({
+        error: {
+          message: "Mauvaise authentification.",
+        },
       });
     }
-    next();
   } catch (error) {
     console.log({ error });
     res.status(401).json({ error });

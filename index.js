@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+
 const cors = require("cors");
 require("dotenv").config();
 
@@ -12,7 +12,7 @@ app.use(cookieParser());
 
 app.use(cors());
 
-mongoose.connect("mongodb://localhost/yoonix", {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -25,11 +25,6 @@ const privateRoutes = require("./routes/private");
 app.use(userRoutes);
 app.use(privateRoutes);
 
-/* const { welcome, refresh } = require("./routes/handlers");
-
-app.get("/welcome", welcome);
-app.post("/refresh", refresh); */
-
-app.listen(4000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server has started");
 });
