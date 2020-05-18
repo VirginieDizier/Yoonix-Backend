@@ -66,7 +66,6 @@ router.post("/user/sign_in", (req, res) => {
     { email, firstname: user.firstname, lastname: user.lastname },
     jwtKey
   );
-  console.log("token:", token);
 
   res.json({
     message: "vous êtes connecté.",

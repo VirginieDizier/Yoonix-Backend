@@ -21,11 +21,8 @@ const authUser = async (req, res, next) => {
       });
     }
     const token = parts[1];
-    console.log({ token });
-    console.log("secret key", process.env.JWT_KEY);
 
     const payload = jwt.verify(token, process.env.JWT_KEY);
-    console.log(payload);
 
     if (payload.email) {
       next();
@@ -37,7 +34,6 @@ const authUser = async (req, res, next) => {
       });
     }
   } catch (error) {
-    console.log({ error });
     res.status(401).json({ error });
   }
 };
@@ -53,7 +49,6 @@ router.get("/private", authUser, async (req, res) => {
     }
     res.json(users);
   } catch (error) {
-    console.log({ message: error.message });
     res.json({ message: error.message });
   }
 });
