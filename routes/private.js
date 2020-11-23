@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const axios = require("axios");
 const User = require("../models/User");
