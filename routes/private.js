@@ -43,7 +43,7 @@ router.get("/private", authUser, async (req, res) => {
     const users = [];
     let i = 0;
     while (i < 10) {
-      let response = await axios.get("https://randomuser.me/api/");
+      let response = await axios.get(RANDOM_API);
       users.push(response.data.results[0]);
       i++;
     }
