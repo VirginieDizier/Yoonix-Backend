@@ -45,12 +45,14 @@ router.get("/private", authUser, async (req, res) => {
   try {
       console.log("ok");
     const users = [];
-    for (let i = 0; i < 10; i++) {
-        console.log("toto");
-        let response = await axios.get("https://randomuser.me/api/");
+    let response = await axios.get("https://randomuser.me/api/?results=10");
         console.log({response});
-      /* users.push(response.data.results[0]); */
-    }
+    /* for (let i = 0; i < 10; i++) {
+        console.log("toto");
+        let response = await axios.get("https://randomuser.me/api/?results=10");
+        console.log({response});
+    //   users.push(response.data.results[0]);
+    } */
     
     res.json(users);
   } catch (error) {
