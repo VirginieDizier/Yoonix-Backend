@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 const axios = require("axios");
 const User = require("../models/User");
@@ -44,7 +43,7 @@ router.get("/private", authUser, async (req, res) => {
     const users = [];
     let i = 0;
     while (i < 10) {
-      let response = await axios.get(RANDOM_API);
+      let response = await axios.get("https://randomuser.me/api/");
       users.push(response.data.results[0]);
       i++;
     }
