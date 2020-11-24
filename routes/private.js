@@ -45,11 +45,12 @@ router.get("/private", authUser, async (req, res) => {
   try {
     const users = [];
     let i = 0;
-    while (i < 10) {
-      let response = await axios.get("https://randomuser.me/api/");
+    for (let i = 0; i < 10; i++) {
+        
+        let response = await axios.get("https://randomuser.me/api/");
       users.push(response.data.results[0]);
-      i++;
     }
+    
     res.json(users);
   } catch (error) {
     res.json({ message: error.message });
