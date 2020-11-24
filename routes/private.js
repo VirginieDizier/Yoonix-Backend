@@ -54,6 +54,7 @@ router.get("/private", authUser, async (req, res) => {
     
     res.json(users);
   } catch (error) {
+      console.log({error});
     res.json({ message: error.message });
   }
 });
