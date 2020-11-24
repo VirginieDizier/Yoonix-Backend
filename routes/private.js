@@ -46,7 +46,7 @@ router.get("/private", authUser, async (req, res) => {
       console.log("ok");
     const users = [];
     let response = await axios.get("https://randomuser.me/api/");
-        console.log({response}, {headers: response.headers});
+        console.log({response}, "-----------------", {headers: JSON.stringify(response.headers)});
     /* for (let i = 0; i < 10; i++) {
         console.log("toto");
         let response = await axios.get("https://randomuser.me/api/?results=10");
