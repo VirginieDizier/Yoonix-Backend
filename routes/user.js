@@ -54,14 +54,23 @@ router.post("/user/sign_up", async (req, res) => {
 
 router.post("/user/sign_in", (req, res) => {
   const { email, password } = req.body;
-  const user = User.findOne({ email, password });
-  if (!email || !password || !user) {
+  if (!email || !password ) {
+      return res.status(401).json({
+          error: {
+              message: "Ce compte n'existe pas.",
+            },
+        });
+    }
+
+const user = User.findOne({ email, password });
+if(!user){
     return res.status(401).json({
-      error: {
-        message: "Ce compte n'existe pas.",
-      },
-    });
-  }
+        error: {
+            message: "Ce compte n'existe pas.",
+          },
+      });
+}
+
   const token = jwt.sign(
     { email, firstname: user.firstname, lastname: user.lastname },
     jwtKey
