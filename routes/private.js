@@ -9,6 +9,7 @@ const authUser = async (req, res, next) => {
   try {
     const auth = req.headers.authorization;
     if (!auth) {
+        console.log("pas d'auth");
       return res.status(401).json({
         error: "Missing Authorization Header",
       });
@@ -27,6 +28,7 @@ const authUser = async (req, res, next) => {
     if (payload.email) {
       next();
     } else {
+        console.log("pas d'email");
       res.status(401).json({
         error: {
           message: "Mauvaise authentification.",
@@ -34,6 +36,7 @@ const authUser = async (req, res, next) => {
       });
     }
   } catch (error) {
+      console.log({error});
     res.status(401).json({ error });
   }
 };
