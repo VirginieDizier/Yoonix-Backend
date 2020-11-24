@@ -42,22 +42,11 @@ const authUser = async (req, res, next) => {
 };
 
 router.get("/private", authUser, async (req, res) => {
-  /* try { */
-    const users = [];
-    let response = await axios.get("https://randomuser.me/api/");
-    console.log({response : response.request.res.responseUrl});
-    /* for (let i = 0; i < 10; i++) {
-        console.log("toto");
-        let response = await axios.get("https://randomuser.me/api/?results=10");
-        console.log({response});
-    } */
-    /* users.push(response.data.results[0]); */
-    res.json(users);
-
-  /* } catch (error) {
-      console.log({error});
+  try {
+      res.json(require("../data/users"))
+    } catch (error) {
     res.json({ message: error.message });
-  } */
+  }
 });
 
 module.exports = router;
